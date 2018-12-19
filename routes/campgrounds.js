@@ -48,6 +48,10 @@ router.get("/:id",function(req,res) {
 		if(err){
 			console.log(err);
 		} else {
+      if(!foundCampground){
+        req.flash("error","Campground not found")
+        return res.redirect("back")
+      }
 			console.log(foundCamp);
 			res.render("campgrounds/show", {campground: foundCamp});
 		}
@@ -61,6 +65,10 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req,res) {
 			console.log(err);
 			res.redirect("/campgrounds");
 		} else {
+      if(!foundCampground){
+        req.flash("error","Campground not found")
+        return res.redirect("back")
+      }
 			res.render("campgrounds/edit",{campground: foundCampground});
 		}
 	});
