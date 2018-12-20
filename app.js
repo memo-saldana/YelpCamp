@@ -11,6 +11,8 @@ var express = require("express"),
 		User = require("./models/user"),
 		seedDB = require("./seeds");
 
+var PORT = process.env.PORT || 5000
+
 // requiring routes
 var commentRoutes = require("./routes/comments"),
 		campgroundRoutes = require("./routes/campgrounds"),
@@ -64,6 +66,6 @@ app.use("/campgrounds",campgroundRoutes);
 app.use("/campgrounds/:id/comments",commentRoutes);
 
 
-app.listen(3000,function() {
-	console.log("YelpCamp started on port 3000");
+app.listen(PORT,function() {
+	console.log(`YelpCamp started on port ${ PORT }`);
 });
