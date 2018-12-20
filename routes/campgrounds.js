@@ -18,6 +18,7 @@ router.get("/",function(req,res) {
 //CREATE
 router.post("/", middleware.isLoggedIn, function(req,res) {
 	var name = req.body.name;
+  var price = req.body.price;
 	var image = req.body.image;
 	var desc = req.body.description;
 	var author = {
@@ -25,7 +26,7 @@ router.post("/", middleware.isLoggedIn, function(req,res) {
 		username: req.user.username
 	}
 
-	var newCamp = {name: name, image: image, description: desc, author: author};
+	var newCamp = {name: name, price: price, image: image, description: desc, author: author};
 	
 	Campground.create(newCamp,function(err,newlyCreated) {
 		if(err){
@@ -48,7 +49,7 @@ router.get("/:id",function(req,res) {
 		if(err){
 			console.log(err);
 		} else {
-      if(!foundCampground){
+      if(!foundCamp){
         req.flash("error","Campground not found")
         return res.redirect("back")
       }
